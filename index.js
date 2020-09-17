@@ -28,11 +28,17 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
- * counter2 would 
+ * counter2 would only be returning the result of the counter inside its function, not storing it anywhere
+ * counter1 allows you to call a function within a function and returns a parameter that is added onto another variable to keep count
  * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ * counter1, as it uses a function (counterMaker) to call on another function (counter)
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * 
+ * counter1 is for storing and displaying many instances of variables, such as keeping score
+ * counter2 is good for just an instance or a counter where keeping the values is not important, such as a counter
  *
 */
 
@@ -58,7 +64,7 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number 
 between 0 and 2. */
-
+/*
 function inning(){
 
   let score = Math.floor(Math.random() * 3);  
@@ -66,8 +72,13 @@ function inning(){
   }
   
   const score2 = inning();
-  console.log(score2);
-  
+  console.log(score2);*/
+
+  function inning(){
+    return Math.floor(Math.random() * 3);
+  }
+
+  console.log(inning());
 
 /* Task 3: finalScore()
 
@@ -91,8 +102,6 @@ function finalScore(inning, ins){
   
   for(i=0; i < ins; i++){
     homescore = homescore + inning();
-  }
-  for(i=0; i < ins; i++){
     awayscore = awayscore + inning();
   }
   
@@ -124,19 +133,52 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function scoreboard(final, inning4, ins4) {
+function getInningScore(inning){
+  return {
+    Home: inning(),
+    Away: inning()
+  }
+}
+
+function scoreboard(inningScore, inning, ins){
+
+  const scoreByInning = [];
+
+  let homeScore = 0;
+  let awayScore = 0;
+
+  for(let i = 0; i < ins; i++){
+    const currentInning = inningScore(inning);
+    homeScore = homeScore + currentInning.Home
+    awayScore = awayScore + currentInning.Away
+    scoreByInning.push(`Inning ${i + 1}: Away: ${currentInning.Away} - Home: ${currentInning.Home}`);
+  }
+  if(homeScore === awayScore){
+    scoreByInning.push(`you will need to play another inning`);
+  }
+  else{
+    scoreByInning.push(`Final Score: Away ${awayScore} - Home: ${homeScore}`);
+  }
+
+return scoreByInning;
+}
+console.log(scoreboard(getInningScore, inning, 9));
+
+/*
+function scoreboard(score4, final4, ins4) {
   
   let aTeam = 0;
   let hTeam = 0;
-
-  for(i=0; i < ins; i++){
-    final = `${i} inning: ${aTeam} - ${hTeam}`;
+  
+  for(i=0; i < ins4; i++){
+    console.log(`${i} inning: ${aTeam} - ${hTeam}`);
     aTeam = aTeam + inning();
     hTeam = hTeam + inning();  
+    
   }
-  let final = {Home: hTeam, Away: aTeam}
-  return final;
+  return score4;
 }
 
-scoreboard(final, inning, 9)
+scoreboard(final, inning, 9)*/
+
 

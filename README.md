@@ -42,6 +42,7 @@ Find the file `index.js` and complete the tasks until your tests are passing.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+Closure is when your code inside a function has access to a function outside of it, and can call upon it
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -63,8 +64,11 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+The closure is in return function() where you are already within the personalDice() function and return function() after you generate a number between 1 and 6 and console.log the results
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+The newRoll will always be a random number, what doesnt change is the console.log and the name in the personalDice() function's parameter
 c. What is the lexical scope of `newRoll`? 
+It receieves the number 1-6 and is only valid within the function() method, it cannot be used outside of that
 
 ### Task 3 - Stretch Goals
 
